@@ -1,0 +1,36 @@
+'''
+Problem Statement 1:
+
+In one state, 52% of the voters are Republicans, and 48% are Democrats. In a second
+state, 47% of the voters are Republicans, and 53% are Democrats. Suppose a simple
+random sample of 100 voters are surveyed from each state.
+What is the probability that the survey will show a greater percentage of Republican
+voters in the second state than in the first state?
+'''
+import math
+from scipy import stats as st
+#P1 = the proportion of Republican voters in the first state i.e .52
+P1 = 0.52
+
+#P2 = the proportion of Republican voters in the second state i.e .47
+P2 = 0.47
+
+#p1 = the proportion of Republican voters in the sample from the first state
+#p2 = the proportion of Republican voters in the sample from the second state
+
+#The number of voters sampled from the first state (n1) = 100
+n1 = 100
+
+#the number of voters sampled from the second state (n2) = 100.
+n2 = 100
+
+mean_of_diff = P1 - P2
+
+std_dev_of_diff = math.sqrt((P1*(1-P1)/n1) + (P2*(1-P2)/n2))
+
+#Here we need to find if (p1 < p2) i.e. (p1 - p2) >0
+#So here the sample var should be zero
+X = 0
+Z_diff = (X - mean_of_diff) / std_dev_of_diff
+
+print("Probability that survey shows greater % of Rep voters in second state is {:.2f}".format(st.norm.cdf(Z_diff)))
